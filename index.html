@@ -28,90 +28,153 @@
                             <a class="nav-link" href="#">Crit Value</a>
                         </li>
                     </ul>
+                    
                 </div>
             </div>
         </nav>
     </header>
     <main class="container-fluid p-3">
         <div class="row">
-            <form class="col-auto container" id="dvCalculate">
-                <div class="row justify-content-space-between">
-                    <div class="col-auto">
-                        <h3>Character stats</h3>
-                        <div class="mb-3">
-                            <label for="baseAttackInput" class="form-label">Base Attack</label>
-                            <input type="number" step="1" class="form-control" id="baseAttackInput" value="800" onchange="calculateDV()">
-                        </div>
-                        <div class="mb-3">
-                            <label for="bonusAttackInput" class="form-label">Bonus Attack</label>
-                            <input type="number" class="form-control" id="bonusAttackInput" value="0" onchange="calculateDV()">
-                        </div>
-                        <div class="mb-3">
-                            <label for="physicalDamageBonusInput" class="form-label">Physical Damage Bonus (%)</label>
-                            <input type="number" step="0.01" class="form-control" id="physicalDamageBonusInput" value="0" onchange="calculateDV()">
-                        </div>
-                        <div class="mb-3">
-                            <label for="elementalDamageBonusInput" class="form-label">Elemental Damage Bonus (%)</label>
-                            <input type="number" step="0.01" class="form-control" id="elementalDamageBonusInput" value="0" onchange="calculateDV()">
-                        </div>
-                        <div class="mb-3">
-                            <label for="critRateInput" class="form-label">Crit Rate (%)</label>
-                            <input type="number" step="0.01" class="form-control" id="critRateInput" value="5" onchange="calculateDV()">
-                        </div>
-                        <div class="mb-3">
-                            <label for="critDamageInput" class="form-label">Crit Damage (%)</label>
-                            <input type="number" step="0.01" class="form-control" id="critDamageInput" value="50" onchange="calculateDV()">
-                        </div>
-                        <div class="row g-3 align-items-center">
-                            <div class="col-auto">
-                                <label for="physicalDamageProportionInput" class="col-form-label">Physical Damage
-                                    Proportion
-                                    (%)</label>
-                                <input type="number" step="1" id="physicalDamageProportionInput" class="form-control" value="80" onchange="calculateDV()">
+                <form class="col-auto container" id="dvCalculate">
+                    <div class="row justify-content-space-between">
+                        <div class="col-auto">
+                            <h3>Character stats</h3>
+                            <div class="mb-3">
+                                <label for="baseAttackInput" class="form-label">Base Attack</label>
+                                <input type="number" step="1" class="form-control" id="baseAttackInput" value="800" onchange="calculateDV(0)">
                             </div>
-                            <div class="col-auto">
-                                <label for="elementalDamageProportionInput" class="col-form-label">Elemental Damage
-                                    Proportion
-                                    (%)</label>
-                                <input type="number" step="1" id="elementalDamageProportionInput" class="form-control" value="20" onchange="calculateDV()">
+                            <div class="mb-3">
+                                <label for="bonusAttackInput" class="form-label">Bonus Attack</label>
+                                <input type="number" class="form-control" id="bonusAttackInput" value="0" onchange="calculateDV(0)">
+                            </div>
+                            <div class="mb-3">
+                                <label for="physicalDamageBonusInput" class="form-label">Physical Damage Bonus (%)</label>
+                                <input type="number" step="0.01" class="form-control" id="physicalDamageBonusInput" value="0" onchange="calculateDV(0)">
+                            </div>
+                            <div class="mb-3">
+                                <label for="elementalDamageBonusInput" class="form-label">Elemental Damage Bonus (%)</label>
+                                <input type="number" step="0.01" class="form-control" id="elementalDamageBonusInput" value="0" onchange="calculateDV(0)">
+                            </div>
+                            <div class="mb-3">
+                                <label for="critRateInput" class="form-label">Crit Rate (%)</label>
+                                <input type="number" step="0.01" class="form-control" id="critRateInput" value="5" onchange="calculateDV(0)">
+                            </div>
+                            <div class="mb-3">
+                                <label for="critDamageInput" class="form-label">Crit Damage (%)</label>
+                                <input type="number" step="0.01" class="form-control" id="critDamageInput" value="50" onchange="calculateDV(0)">
+                            </div>
+                            <div class="row g-3 align-items-center">
+                                <div class="col-auto">
+                                    <label for="physicalDamageProportionInput" class="col-form-label">Physical Damage
+                                        Proportion
+                                        (%)</label>
+                                    <input type="number" step="1" id="physicalDamageProportionInput" class="form-control" value="80" onchange="calculateDV(0)">
+                                </div>
+                                <div class="col-auto">
+                                    <label for="elementalDamageProportionInput" class="col-form-label">Elemental Damage
+                                        Proportion
+                                        (%)</label>
+                                    <input type="number" step="1" id="elementalDamageProportionInput" class="form-control" value="20" onchange="calculateDV(0)">
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="col-auto">
-                        <h3>Artifact Stats</h3>
-                        <div class="mb-3">
-                            <label for="artifactAttackInput" class="form-label">Attack</label>
-                            <input type="number" step="1" class="form-control" id="artifactAttackInput" value="0" onchange="calculateDV()">
+                        <div class="col-auto">
+                            <h3>Artifact 1 Stats</h3>
+                            <div class="mb-3">
+                                <label for="artifact1AttackInput" class="form-label">Attack</label>
+                                <input type="number" step="1" class="form-control" id="artifact1AttackInput" value="0" onchange="calculateDV(1)">
+                            </div>
+                            <div class="mb-3">
+                                <label for="artifact1AttackPercentageInput" class="form-label">Attack (%)</label>
+                                <input type="number" step="0.01" class="form-control" id="artifact1AttackPercentageInput" value="0" onchange="calculateDV(1)">
+                            </div>
+                            <div class="mb-3">
+                                <label for="artifact1PhysicalDamageBonusInput" class="form-label">Physical Damage Bonus
+                                    (%)</label>
+                                <input type="number" step="0.01" class="form-control" id="artifact1PhysicalDamageBonusInput" value="0" onchange="calculateDV(1)">
+                            </div>
+                            <div class="mb-3">
+                                <label for="artifact1ElementalDamageBonusInput" class="form-label">Elemental Damage Bonus
+                                    (%)</label>
+                                <input type="number" step="0.01" class="form-control"
+                                    id="artifact1ElementalDamageBonusInput" value="0" onchange="calculateDV(1)">
+                            </div>
+                            <div class="mb-3">
+                                <label for="artifact1CritRateInput" class="form-label">Crit Rate (%)</label>
+                                <input type="number" step="0.01" class="form-control" id="artifact1CritRateInput" value="0" onchange="calculateDV(1)">
+                            </div>
+                            <div class="mb-3">
+                                <label for="artifact1CritDamageInput" class="form-label">Crit Damage (%)</label>
+                                <input type="number" step="0.01" class="form-control" id="artifact1CritDamageInput" value="0" onchange="calculateDV(1)">
+                            </div>
+                            <div class="container-fluid badge bg-primary" id="damageValue1">Damage Value 1</div>
                         </div>
-                        <div class="mb-3">
-                            <label for="artifactAttackPercentageInput" class="form-label">Attack (%)</label>
-                            <input type="number" step="0.01" class="form-control" id="artifactAttackPercentageInput" value="0" onchange="calculateDV()">
+
+                        <div class="col-auto">
+                            <h3>Artifact 2 Stats</h3>
+                            <div class="mb-3">
+                                <label for="artifact2AttackInput" class="form-label">Attack</label>
+                                <input type="number" step="1" class="form-control" id="artifact2AttackInput" value="0" onchange="calculateDV(2)">
+                            </div>
+                            <div class="mb-3">
+                                <label for="artifact2AttackPercentageInput" class="form-label">Attack (%)</label>
+                                <input type="number" step="0.01" class="form-control" id="artifact2AttackPercentageInput" value="0" onchange="calculateDV(2)">
+                            </div>
+                            <div class="mb-3">
+                                <label for="artifact2PhysicalDamageBonusInput" class="form-label">Physical Damage Bonus
+                                    (%)</label>
+                                <input type="number" step="0.01" class="form-control" id="artifact2PhysicalDamageBonusInput" value="0" onchange="calculateDV(2)">
+                            </div>
+                            <div class="mb-3">
+                                <label for="artifact2ElementalDamageBonusInput" class="form-label">Elemental Damage Bonus
+                                    (%)</label>
+                                <input type="number" step="0.01" class="form-control"
+                                    id="artifact2ElementalDamageBonusInput" value="0" onchange="calculateDV(2)">
+                            </div>
+                            <div class="mb-3">
+                                <label for="artifact2CritRateInput" class="form-label">Crit Rate (%)</label>
+                                <input type="number" step="0.01" class="form-control" id="artifact2CritRateInput" value="0" onchange="calculateDV(2)">
+                            </div>
+                            <div class="mb-3">
+                                <label for="artifact2CritDamageInput" class="form-label">Crit Damage (%)</label>
+                                <input type="number" step="0.01" class="form-control" id="artifact2CritDamageInput" value="0" onchange="calculateDV(2)">
+                            </div>
+                            <div class="container-fluid badge bg-primary" id="damageValue2">Damage Value 2</div>
                         </div>
-                        <div class="mb-3">
-                            <label for="artifactPhysicalDamageBonusInput" class="form-label">Physical Damage Bonus
-                                (%)</label>
-                            <input type="number" step="0.01" class="form-control" id="artifactPhysicalDamageBonusInput" value="0" onchange="calculateDV()">
-                        </div>
-                        <div class="mb-3">
-                            <label for="artifactElementalDamageBonusInput" class="form-label">Elemental Damage Bonus
-                                (%)</label>
-                            <input type="number" step="0.01" class="form-control"
-                                id="artifactElementalDamageBonusInput" value="0" onchange="calculateDV()">
-                        </div>
-                        <div class="mb-3">
-                            <label for="artifactCritRateInput" class="form-label">Crit Rate (%)</label>
-                            <input type="number" step="0.01" class="form-control" id="artifactCritRateInput" value="0" onchange="calculateDV()">
-                        </div>
-                        <div class="mb-3">
-                            <label for="artifactCritDamageInput" class="form-label">Crit Damage (%)</label>
-                            <input type="number" step="0.01" class="form-control" id="artifactCritDamageInput" value="0" onchange="calculateDV()">
+
+                        <div class="col-auto">
+                            <h3>Artifact 3 Stats</h3>
+                            <div class="mb-3">
+                                <label for="artifact3AttackInput" class="form-label">Attack</label>
+                                <input type="number" step="1" class="form-control" id="artifact3AttackInput" value="0" onchange="calculateDV(3)">
+                            </div>
+                            <div class="mb-3">
+                                <label for="artifact3AttackPercentageInput" class="form-label">Attack (%)</label>
+                                <input type="number" step="0.01" class="form-control" id="artifact3AttackPercentageInput" value="0" onchange="calculateDV(3)">
+                            </div>
+                            <div class="mb-3">
+                                <label for="artifact3PhysicalDamageBonusInput" class="form-label">Physical Damage Bonus
+                                    (%)</label>
+                                <input type="number" step="0.01" class="form-control" id="artifact3PhysicalDamageBonusInput" value="0" onchange="calculateDV(3)">
+                            </div>
+                            <div class="mb-3">
+                                <label for="artifact3ElementalDamageBonusInput" class="form-label">Elemental Damage Bonus
+                                    (%)</label>
+                                <input type="number" step="0.01" class="form-control"
+                                    id="artifact3ElementalDamageBonusInput" value="0" onchange="calculateDV(3)">
+                            </div>
+                            <div class="mb-3">
+                                <label for="artifact3CritRateInput" class="form-label">Crit Rate (%)</label>
+                                <input type="number" step="0.01" class="form-control" id="artifact3CritRateInput" value="0" onchange="calculateDV(3)">
+                            </div>
+                            <div class="mb-3">
+                                <label for="artifact3CritDamageInput" class="form-label">Crit Damage (%)</label>
+                                <input type="number" step="0.01" class="form-control" id="artifact3CritDamageInput" value="0" onchange="calculateDV(3)">
+                            </div>
+                            <div class="container-fluid badge bg-primary" id="damageValue3">Damage Value 3</div>
                         </div>
                     </div>
-                </div>
-                <div class="row justify-content-center">
-                    <button type="button" class="btn btn-primary mt-3 col-6" id="damageValue">Посчитать</button>   
-                </div>
             </form>
         </div>
     </main>
