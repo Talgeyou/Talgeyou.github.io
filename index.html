@@ -6,6 +6,7 @@
     <title>Genshin DV Calculator</title>
     <link rel="stylesheet" href="css/bootstrap-reboot.css">
     <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
 
     <link rel="apple-touch-icon" sizes="180x180" href="media/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="media/favicon-32x32.png">
@@ -37,9 +38,22 @@
     </header>
     <main role="main" class="container-fluid p-3">
         <div class="row">
+            <div class="col-auto container card mb-3 p-3">
+            
+                <h1 class="mb-3">DV Calculator usage</h1>
+            
+                <ol>
+                    <li class="mb-1">If artifact equipped you should remove it</li>
+                    <li class="mb-1">Then you need to input your character's stats without this artifact if form "Character's stats"</li>
+                    <li class="mb-1">Now you need to input artifact's stats in one of "Artifact stats" forms (You can input stats of multiple artifacts to compare them)</li>
+                    <li class="mb-1">DV value will be displayed in box under the artifact's form</li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
             <form class="col-auto container" id="dvCalculate">
-                <div class="row justify-content-space-between">
-                    <div class="col-auto">
+                <div class="row justify-content-center text-white">
+                    <div class="col-auto card m-3 p-3 bg-dark">
                         <h3>Character stats</h3>
                         <div class="mb-3">
                             <label for="baseAttackInput" class="form-label">Base Attack</label>
@@ -89,7 +103,7 @@
                         </div>
                     </div>
 
-                    <div class="col-auto">
+                    <div class="col-auto card m-3 p-3 bg-secondary">
                         <h3>Artifact 1 Stats</h3>
                         <div class="mb-3">
                             <label for="artifact1AttackInput" class="form-label">Attack</label>
@@ -123,10 +137,10 @@
                             <input type="number" step="0.01" class="form-control" id="artifact1CritDamageInput"
                                 value="0" onchange="calculateDV(1)">
                         </div>
-                        <div class="container-fluid badge bg-primary" id="damageValue1">Damage Value 1</div>
+                        <div class="container-fluid badge bg-dark" id="damageValue1">0%</div>
                     </div>
 
-                    <div class="col-auto">
+                    <div class="col-auto card m-3 p-3 bg-secondary">
                         <h3>Artifact 2 Stats</h3>
                         <div class="mb-3">
                             <label for="artifact2AttackInput" class="form-label">Attack</label>
@@ -160,10 +174,10 @@
                             <input type="number" step="0.01" class="form-control" id="artifact2CritDamageInput"
                                 value="0" onchange="calculateDV(2)">
                         </div>
-                        <div class="container-fluid badge bg-primary" id="damageValue2">Damage Value 2</div>
+                        <div class="container-fluid badge bg-dark" id="damageValue2">0%</div>
                     </div>
 
-                    <div class="col-auto">
+                    <div class="col-auto card m-3 p-3 bg-secondary">
                         <h3>Artifact 3 Stats</h3>
                         <div class="mb-3">
                             <label for="artifact3AttackInput" class="form-label">Attack</label>
@@ -197,12 +211,13 @@
                             <input type="number" step="0.01" class="form-control" id="artifact3CritDamageInput"
                                 value="0" onchange="calculateDV(3)">
                         </div>
-                        <div class="container-fluid badge bg-primary" id="damageValue3">Damage Value 3</div>
+                        <div class="container-fluid badge bg-dark" id="damageValue3">0%</div>
                     </div>
                 </div>
             </form>
         </div>
     </main>
+    <div class="bg"></div>
 
     <script src="js/bootstrap.js"></script>
     <script src="js/script.js"></script>

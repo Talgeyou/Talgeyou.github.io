@@ -59,9 +59,11 @@ let calculateCritDV = function (numberOfArtifact) {
 
 let calculateDV = function (numberOfArtifact) {
     if (+numberOfArtifact === 0) {
+        
         calculateDV(1);
         calculateDV(2);
         calculateDV(3);
+
     }
     else {
         let characterBaseAttack = +document.getElementById("baseAttackInput").value;
@@ -72,7 +74,44 @@ let calculateDV = function (numberOfArtifact) {
         let physicalDamageBonusDV = calculatePhysicalDamageBonusDV(numberOfArtifact);
         let elementalDamageBonusDV = calculateElementalDamageBonusDV(numberOfArtifact);
         let critDV = calculateCritDV(numberOfArtifact);
-        console.log(attackDV + attackPercentageDV + physicalDamageBonusDV + elementalDamageBonusDV + critDV);
-        document.getElementById("damageValue" + String(numberOfArtifact)).innerHTML = String(attackDV + attackPercentageDV + physicalDamageBonusDV + elementalDamageBonusDV + critDV) + "%";
+        let dv = attackDV + attackPercentageDV + physicalDamageBonusDV + elementalDamageBonusDV + critDV;
+        dv = Math.round(dv * 100) / 100;
+        document.getElementById("damageValue" + String(numberOfArtifact)).innerHTML = String(dv) + "%";
     }
+
+    let elements = [
+        document.getElementById("damageValue1"),
+        document.getElementById("damageValue2"),
+        document.getElementById("damageValue3"),
+    ]; 
+
+    let dvs = []
+
+    elements.forEach(element => {
+        let value = +element.innerHTML.slice(0, -1);
+        Number.isNaN(value) ? dvs.push(0) : dvs.push(+value);
+    });
+
+    for (let i = 0; i < elements.length; i++) {
+        e = elements[i];
+        
+        if (dvs[i] === Math.max(...dvs)) {
+            e.classList.remove("bg-dark");
+            e.classList.remove("bg-danger");
+            e.classList.add("bg-success");
+        } else if (dvs[i] === Math.min(...dvs)) {
+            e.classList.remove("bg-dark");
+            e.classList.add("bg-danger");
+            e.classList.remove("bg-success");
+        } else {
+            e.classList.add("bg-dark");
+            e.classList.remove("bg-danger");
+            e.classList.remove("bg-success");
+        }
+    }
+
+    console.log("Elements ", ...elements);
+    console.log("DVs ", ...dvs);
+    console.log("Max dv ", Math.max(...dvs));
+    console.log("Min dv ", Math.min(...dvs));
 };
