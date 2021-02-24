@@ -1,82 +1,85 @@
-let calculateAttackDV = function (characterAttack, numberOfArtifact) {
+let calculateAttackDV = function (characterAttack, artifactAttack) {
     if (characterAttack === 0) {
-        console.log("Attack DV: 0")
         return 0;
     }
-    let artifactAttack = +document.getElementById("artifact" + String(numberOfArtifact) + "AttackInput").value;
     let attackDV = artifactAttack / characterAttack * 100;
-    console.log("Attack DV: " + attackDV);
     return attackDV;
 }
 
-let calculateAttackPercentageDV = function (characterBaseAttack, characterAttack, numberOfArtifact) {
+let calculateAttackPercentageDV = function (characterBaseAttack, characterAttack, artifactAttackPercentage) {
     if (characterAttack === 0) {
-        console.log("Attack Percentage DV: 0")
         return 0;
     }
-    let artifactPercentageAttack = +document.getElementById("artifact" + String(numberOfArtifact) + "AttackPercentageInput").value;
-    let attackPercentageDV = artifactPercentageAttack * characterBaseAttack / characterAttack;
-    console.log("Attack Percentage DV: " + attackPercentageDV)
+    let attackPercentageDV = artifactAttackPercentage * characterBaseAttack / characterAttack;
     return attackPercentageDV;
 
 }
 
-let calculatePhysicalDamageBonusDV = function (numberOfArtifact) {
-    let physicalDamageProportion = +document.getElementById("physicalDamageProportionInput").value;
-    if (physicalDamageProportion === 0) {
-        console.log("Physical Damage Bonus DV: 0");
+let calculatePhysicalDamageBonusDV = function (characterPhysicalDamage, characterPhysicalDamageProportion, artifactPhysicalDamage) {
+    if (characterPhysicalDamageProportion === 0) {
         return 0;
     }
-    let characterPhysicalDamageBonus = +document.getElementById("physicalDamageBonusInput").value;
-    let artifactPhysicalDamageBonus = +document.getElementById("artifact" + String(numberOfArtifact) + "PhysicalDamageBonusInput").value;
-    let physicalDamageBonusDV = artifactPhysicalDamageBonus / (100 + characterPhysicalDamageBonus) * (physicalDamageProportion / 100) * 100;
-    console.log("Physical Damage Bonus DV: " + physicalDamageBonusDV);
+    let physicalDamageBonusDV = artifactPhysicalDamage / (100 + characterPhysicalDamage) * (characterPhysicalDamageProportion / 100) * 100;
     return physicalDamageBonusDV;
 }
 
-let calculateElementalDamageBonusDV = function (numberOfArtifact) {
-    let elementalDamageProportion = +document.getElementById("elementalDamageProportionInput").value;
-    if (elementalDamageProportion === 0) {
-        console.log("Elemental Damage Bonus DV: 0");
+let calculateElementalDamageBonusDV = function (characterElementalDamage, characterElementalDamageProportion, artifactElementalDamage) {
+    if (characterElementalDamageProportion === 0) {
         return 0;
     }
-    let characterElementalDamageBonus = +document.getElementById("elementalDamageBonusInput").value;
-    let artifactElementalDamageBonus = +document.getElementById("artifact" + String(numberOfArtifact) + "ElementalDamageBonusInput").value;
-    let elementalDamageBonusDV = artifactElementalDamageBonus / (100 + characterElementalDamageBonus) * (elementalDamageProportion / 100) * 100;
-    console.log("Elemental Damage Bonus DV: " + elementalDamageBonusDV);
+    let elementalDamageBonusDV = artifactElementalDamage / (100 + characterElementalDamage) * (characterElementalDamageProportion / 100) * 100;
     return elementalDamageBonusDV;
 }
 
-let calculateCritDV = function (numberOfArtifact) {
-    let characterCritRate = +document.getElementById("critRateInput").value;
-    let characterCritDamage = +document.getElementById("critDamageInput").value;
-    let artifactCritRate = +document.getElementById("artifact" + String(numberOfArtifact) + "CritRateInput").value;
-    let artifactCritDamage = +document.getElementById("artifact" + String(numberOfArtifact) + "CritDamageInput").value;
-    let critDV = (((1 - (characterCritRate + artifactCritRate) / 100) + (characterCritRate + artifactCritRate) / 100 * (100 + artifactCritDamage + characterCritDamage) / 100) - ((1 - characterCritRate / 100) + characterCritRate / 100 * (100 + characterCritDamage) / 100)) / ((1 - characterCritRate / 100) + characterCritRate / 100 * (100 + characterCritDamage) / 100) * 100;
-    console.log("Crit DV: " + critDV);
+let calculateCritDV = function (characterCritRate, characterCritDamage, artifactCritRate, artifactCritDamage) {
+    let critDV = (((1 - (characterCritRate + artifactCritRate) / 100)
+                + (characterCritRate + artifactCritRate) / 100 * (100 + artifactCritDamage + characterCritDamage) / 100)
+                - ((1 - characterCritRate / 100) + characterCritRate / 100 * (100 + characterCritDamage) / 100))
+                / ((1 - characterCritRate / 100) + characterCritRate / 100 * (100 + characterCritDamage) / 100) * 100;
     return critDV;
 }
 
 let calculateDV = function (numberOfArtifact) {
     if (+numberOfArtifact === 0) {
-        
         calculateDV(1);
         calculateDV(2);
         calculateDV(3);
-
     }
     else {
-        let characterBaseAttack = +document.getElementById("baseAttackInput").value;
-        let characterBonusAttack = +document.getElementById("bonusAttackInput").value;
-        let characterAttack = characterBaseAttack + characterBonusAttack;
-        let attackDV = calculateAttackDV(characterAttack, numberOfArtifact);
-        let attackPercentageDV = calculateAttackPercentageDV(characterBaseAttack, characterAttack, numberOfArtifact);
-        let physicalDamageBonusDV = calculatePhysicalDamageBonusDV(numberOfArtifact);
-        let elementalDamageBonusDV = calculateElementalDamageBonusDV(numberOfArtifact);
-        let critDV = calculateCritDV(numberOfArtifact);
+        let character = {
+            baseAttack: +document.getElementById("baseAttackInput").value,
+            bonusAttack: +document.getElementById("bonusAttackInput").value,
+            physicalDamage: +document.getElementById("physicalDamageBonusInput").value,
+            physicalDamageProportion: +document.getElementById("physicalDamageProportionInput").value,
+            elementalDamage: +document.getElementById("elementalDamageBonusInput").value,
+            elementalDamageProportion: +document.getElementById("elementalDamageProportionInput").value,
+            critRate: +document.getElementById("critRateInput").value,
+            critDamage: +document.getElementById("critDamageInput").value,                        
+        };
+        character.totalAttack = character.baseAttack + character.bonusAttack;
+        
+        let artifact = {
+            attack: +document.getElementById(`artifact${numberOfArtifact}AttackInput`).value,
+            attackPercentage: +document.getElementById(`artifact${numberOfArtifact}AttackPercentageInput`).value,
+            physicalDamage: +document.getElementById(`artifact${numberOfArtifact}PhysicalDamageBonusInput`).value,
+            elementalDamage: +document.getElementById(`artifact${numberOfArtifact}ElementalDamageBonusInput`).value,
+            critRate: +document.getElementById(`artifact${numberOfArtifact}CritRateInput`).value,
+            critDamage: +document.getElementById(`artifact${numberOfArtifact}CritDamageInput`).value,
+        }
+
+        console.log([character, artifact]);
+
+        let attackDV = calculateAttackDV(character.totalAttack, artifact.attack);
+        let attackPercentageDV = calculateAttackPercentageDV(character.baseAttack, character.totalAttack, artifact.attackPercentage);
+        let physicalDamageBonusDV = calculatePhysicalDamageBonusDV(character.physicalDamage, character.physicalDamageProportion, artifact.physicalDamage);
+        let elementalDamageBonusDV = calculateElementalDamageBonusDV(character.elementalDamage, character.elementalDamageProportion, artifact.elementalDamage);
+        let critDV = calculateCritDV(character.critRate, character.critDamage, artifact.critRate, artifact.critDamage);
+
+        console.log([attackDV, attackPercentageDV, physicalDamageBonusDV, elementalDamageBonusDV, critDV]);
+
         let dv = attackDV + attackPercentageDV + physicalDamageBonusDV + elementalDamageBonusDV + critDV;
         dv = Math.round(dv * 100) / 100;
-        document.getElementById("damageValue" + String(numberOfArtifact)).innerHTML = String(dv) + "%";
+        document.getElementById("damageValue" + String(numberOfArtifact)).innerHTML = `${dv}%`;
     }
 
     let elements = [
@@ -109,9 +112,4 @@ let calculateDV = function (numberOfArtifact) {
             e.classList.remove("bg-success");
         }
     }
-
-    console.log("Elements ", ...elements);
-    console.log("DVs ", ...dvs);
-    console.log("Max dv ", Math.max(...dvs));
-    console.log("Min dv ", Math.min(...dvs));
 };
